@@ -15,7 +15,7 @@ import:
   subpackages:
   - require
 - package: github.com/tendermint/abci
-  version: develop
+  version: feature/new-logging
   subpackages:
   - client
   - example/dummy
@@ -28,7 +28,7 @@ import:
   - data
 - package: github.com/tendermint/log15
 - package: github.com/tendermint/tmlibs
-  version: cli
+  version: log
   subpackages:
   - autofile
   - cli
@@ -37,7 +37,7 @@ import:
   - db
   - events
   - flowrate
-  - logger
+  - log
   - merkle
 - package: golang.org/x/crypto
   subpackages:
