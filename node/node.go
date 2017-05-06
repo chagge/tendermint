@@ -3,6 +3,7 @@ package node
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"net"
 	"net/http"
 	"strings"
@@ -113,6 +114,13 @@ func NewNode(config *cfg.Config, privValidator *types.PrivValidator, clientCreat
 		if bytes.Equal(privValidator.Address, addr) {
 			fastSync = false
 		}
+	}
+
+	// Log whether this node is a validator or an observer
+	if state.Validators.HasAddress(privValidator.Address) {
+		log.Notice("This node is a validator")
+	} else {
+		log.Notice("This node is an observer")
 	}
 
 	// Make BlockchainReactor
