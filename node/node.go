@@ -3,7 +3,6 @@ package node
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"net"
 	"net/http"
 	"strings"
