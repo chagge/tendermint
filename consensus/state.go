@@ -521,7 +521,8 @@ func (cs *ConsensusState) updateToState(state *sm.State) {
 		lastPrecommits = cs.Votes.Precommits(cs.CommitRound)
 	}
 
-	if validators.HasAddress(cs.privValidator.GetAddress()) {
+	// Log whether this node is a validator
+	if privVal := cs.privValidator; privVal != nil && validators.HasAddress(privVal.GetAddress()) {
 		log.Notice("This node is a validator")
 	} else {
 		log.Notice("This node is not a validator")
