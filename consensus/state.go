@@ -521,6 +521,12 @@ func (cs *ConsensusState) updateToState(state *sm.State) {
 		lastPrecommits = cs.Votes.Precommits(cs.CommitRound)
 	}
 
+	if validators.HasAddress(cs.privValidator.GetAddress()) {
+		log.Notice("This node is a validator")
+	} else {
+		log.Notice("This node is not a validator")
+	}
+
 	// Next desired block height
 	height := state.LastBlockHeight + 1
 
@@ -1210,7 +1216,7 @@ func (cs *ConsensusState) finalizeCommit(height int) {
 	// NOTE: If we fail before firing, these events will never fire
 	//
 	// TODO: Either
-	// 	* Fire before persisting state, in ApplyBlock
+	//	* Fire before persisting state, in ApplyBlock
 	//	* Fire on start up if we haven't written any new WAL msgs
 	//   Both options mean we may fire more than once. Is that fine ?
 	types.FireEventNewBlock(cs.evsw, types.EventDataNewBlock{block})

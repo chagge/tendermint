@@ -119,7 +119,7 @@ func NewNode(config *cfg.Config, privValidator *types.PrivValidator, clientCreat
 	if state.Validators.HasAddress(privValidator.Address) {
 		log.Notice("This node is a validator")
 	} else {
-		log.Notice("This node is an observer")
+		log.Notice("This node is not a validator")
 	}
 
 	// Make BlockchainReactor
