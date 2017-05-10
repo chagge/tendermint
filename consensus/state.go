@@ -1137,6 +1137,7 @@ func (cs *ConsensusState) tryFinalizeCommit(height int) {
 		log.Warn("Attempt to finalize failed. We don't have the commit block.", "height", height, "proposal-block", cs.ProposalBlock.Hash(), "commit-block", blockID.Hash)
 		return
 	}
+
 	//	go
 	cs.finalizeCommit(height)
 }

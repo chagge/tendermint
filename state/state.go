@@ -144,10 +144,6 @@ func (s *State) SetBlockAndValidators(header *types.Header, blockPartsHeader typ
 		// TODO: err or carry on?
 	}
 
-	// TODO: Log whether this node was removed from the validator set or added to it.
-	// Needs access to this node's privKey.
-	// if nextValSet.HasAddress(address []byte)
-
 	// Update validator accums and set state variables
 	nextValSet.IncrementAccum(1)
 
