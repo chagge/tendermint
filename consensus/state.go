@@ -521,13 +521,6 @@ func (cs *ConsensusState) updateToState(state *sm.State) {
 		lastPrecommits = cs.Votes.Precommits(cs.CommitRound)
 	}
 
-	// Log whether this node is a validator
-	if privVal := cs.privValidator; privVal != nil && validators.HasAddress(privVal.GetAddress()) {
-		log.Notice("This node is a validator")
-	} else {
-		log.Notice("This node is not a validator")
-	}
-
 	// Next desired block height
 	height := state.LastBlockHeight + 1
 
@@ -771,15 +764,17 @@ func (cs *ConsensusState) enterPropose(height int, round int) {
 
 	// Nothing more to do if we're not a validator
 	if cs.privValidator == nil {
+		log.Notice("This node is not a validator")
 		return
 	}
 
 	if !bytes.Equal(cs.Validators.GetProposer().Address, cs.privValidator.GetAddress()) {
 		log.Info("enterPropose: Not our turn to propose", "proposer", cs.Validators.GetProposer().Address, "privValidator", cs.privValidator)
+		log.Notice("This node is a validator")
 	} else {
 		log.Info("enterPropose: Our turn to propose", "proposer", cs.Validators.GetProposer().Address, "privValidator", cs.privValidator)
+		log.Notice("This node is a validator")
 		cs.decideProposal(height, round)
-
 	}
 }
 
